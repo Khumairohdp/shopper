@@ -29,7 +29,7 @@ const Footer = () => {
             <Link href="#">FAQs</Link>
           </FooterList>
           <div className="w-full md:w-1/3 mb-6 md:mb-0">
-            <h3 className="text-base font-bold mb-2">About Us</h3>
+            <h3 className="text-base font-bold mb-2">Contact Us</h3>
             <p className="mb-2">At our electronics store</p>
             <p>&copy; {new Date().getFullYear()} shopper. All Right Reserved</p>
           </div>

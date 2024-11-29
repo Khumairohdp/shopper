@@ -52,6 +52,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   });
 
   const router = useRouter();
+  console.log("here");
   console.log(cartProducts);
 
   useEffect(() => {
@@ -60,7 +61,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
       const existingIndex = cartProducts.findIndex(
         (item) => item.id === product.id
       );
-
+      console.log("existing index: " + existingIndex);
       if (existingIndex > -1) {
         setIsProductInCart(true);
       }
