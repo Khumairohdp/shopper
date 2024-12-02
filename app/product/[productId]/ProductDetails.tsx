@@ -39,7 +39,7 @@ const Horizontal = () => {
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   const { handleAddProductToCart, cartProducts } = useCart();
-  const [isProductInCart, setIsProductInCart] = useState(false);
+  //const [isProductInCart, setIsProductInCart] = useState(false);
   const [cartProduct, setCartProduct] = useState<CartProductType>({
     id: product.id,
     name: product.name,
@@ -52,21 +52,23 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   });
 
   const router = useRouter();
-  console.log("here");
-  console.log(cartProducts);
+  // console.log("here");
+  // console.log(cartProducts);
 
-  useEffect(() => {
-    setIsProductInCart(false);
-    if (cartProducts) {
-      const existingIndex = cartProducts.findIndex(
-        (item) => item.id === product.id
-      );
-      console.log("existing index: " + existingIndex);
-      if (existingIndex > -1) {
-        setIsProductInCart(true);
-      }
-    }
-  }, [cartProduct]);
+  const isProductInCart = cartProducts?.some((item) => item.id === product.id);
+
+  // useEffect(() => {
+  //   setIsProductInCart(false);
+  //   if (cartProducts) {
+  //     const existingIndex = cartProducts.findIndex(
+  //       (item) => item.id === product.id
+  //     );
+  //     console.log("existing index: " + existingIndex);
+  //     if (existingIndex > -1) {
+  //       setIsProductInCart(true);
+  //     }
+  //   }
+  // }, [cartProduct]);
 
   const productRating =
     product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
@@ -95,7 +97,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
       return { ...prev, quantity: --prev.quantity };
     });
   }, [cartProduct]);
-
+  console.log(isProductInCart);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
       <ProductImage
@@ -121,8 +123,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         <div className={product.stock ? "text-teal-400" : "text-rose-400"}>
           {product.stock ? "In stock" : "Out of stock"}
         </div>
-        <Image src="/image" width={20} height={20} alt="" />
+
         <Horizontal />
+
         {isProductInCart ? (
           <>
             <p>

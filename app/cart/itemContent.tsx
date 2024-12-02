@@ -6,12 +6,18 @@ import Link from "next/link";
 import { truncateText } from "@/utils/truncateText";
 import Image from "next/image";
 import SetQuantity from "../components/products/SetQuantity";
+import { useCart } from "@/hooks/useCart";
 
 interface ItemContentProps {
   item: CartProductType;
 }
 
 const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
+  const {
+    handleRemoveProductFromCart,
+    handleCartQtyIncrease,
+    handleCartQtyDecrease,
+  } = useCart();
   return (
     <div
       className="
@@ -47,7 +53,10 @@ const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
           <Link href={`/product/${item.id}`}>{truncateText(item.name)}</Link>
           <div>{item.selectedImg.color}</div>
           <div className="w-700px">
-            <button className="text-slide-500 undeline" onClick={() => {}}>
+            <button
+              className="text-slide-500 undeline"
+              onClick={() => handleRemoveProductFromCart(item)}
+            >
               Remove
             </button>
           </div>
@@ -58,13 +67,17 @@ const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
         <SetQuantity
           cartProduct={item}
           carCounter={true}
-          handleQtyDecrease={() => {}}
-          handleQtyIncrease={() => {}}
+          handleQtyDecrease={() => {
+            handleCartQtyDecrease(item);
+          }}
+          handleQtyIncrease={() => {
+            handleCartQtyIncrease(item);
+          }}
         />
       </div>
 
       <div className="justify-self-end font-semibold">
-        {item.price * item.quantity}
+        {formatPrice(item.price * item.quantity)}
       </div>
     </div>
   );

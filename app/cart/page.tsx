@@ -3,7 +3,7 @@ import CartClient from "./CartClient";
 
 const Cart = () => {
   return (
-    <div>
+    <div className="mt-6">
       <Container>
         <CartClient />
       </Container>
