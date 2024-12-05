@@ -15,7 +15,7 @@ const Avatar: React.FC<AvatarProps> = ({ src }) => {
       width="30"
     />;
   }
-  return <FaUserCircle size="24" />;
+  return <FaUserCircle size={24} />;
 };
 
 export default Avatar;
